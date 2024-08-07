@@ -19,16 +19,18 @@ func letterCasePermutation(s string) []string {
 
 		c := s[i]
 
+		// 直接添加当前字符
 		path = append(path, c)
 		backtrack(i + 1)
 		path = path[:len(path)-1]
 
-		if c >= 65 && c <= 90 {
+		// 如果是字母，考虑大小写转换
+		if c >= 'A' && c <= 'Z' {
 			path = append(path, c+32)
 			backtrack(i + 1)
 			path = path[:len(path)-1]
 		}
-		if c >= 97 && c <= 122 {
+		if c >= 'a' && c <= 'z' {
 			path = append(path, c-32)
 			backtrack(i + 1)
 			path = path[:len(path)-1]
