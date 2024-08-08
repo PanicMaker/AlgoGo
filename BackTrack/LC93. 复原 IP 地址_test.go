@@ -26,3 +26,25 @@ func Test_restoreIpAddresses(t *testing.T) {
 		})
 	}
 }
+
+// 性能测试函数
+func BenchmarkRestoreIpAddresses(b *testing.B) {
+	// 定义测试用例
+	testCases := []struct {
+		input string
+	}{
+		{"25525511135"},
+		{"0000"},
+		{"1111"},
+		{"010010"},
+		{"101023"},
+	}
+
+	for _, tc := range testCases {
+		b.Run(tc.input, func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				restoreIpAddresses(tc.input)
+			}
+		})
+	}
+}
