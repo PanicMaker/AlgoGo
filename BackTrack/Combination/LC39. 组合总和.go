@@ -24,7 +24,7 @@ func combinationSumI(candidates []int, target int) [][]int {
 		for j := i; j < n; j++ {
 			newTarget := target - candidates[j]
 			path = append(path, candidates[j])
-			backtrack(j+1, newTarget)
+			backtrack(j, newTarget)
 			target += candidates[j]
 			path = path[:len(path)-1]
 		}
