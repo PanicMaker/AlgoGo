@@ -9,9 +9,9 @@ func solveNQueensI(n int) [][]string {
 	column := make([]int, n)
 
 	isValid := func(row int, col int) bool {
-		for Row := 0; Row < row; Row++ {
-			Col := column[Row]
-			if row+col == Row+Col || row-col == Row-Col {
+		for r := 0; r < row; r++ {
+			c := column[r]
+			if row+col == r+c || row-col == r-c {
 				return false
 			}
 		}
