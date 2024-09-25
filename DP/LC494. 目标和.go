@@ -120,6 +120,7 @@ func findTargetSumWays3(nums []int, target int) int {
 	return dfs(n-1, capacity/2)
 }
 
+// 1:1 翻译成递推
 func findTargetSumWays4(nums []int, target int) int {
 	sum := 0
 	for _, num := range nums {
@@ -141,20 +142,98 @@ func findTargetSumWays4(nums []int, target int) int {
 
 	n := len(nums)
 
-	memo := make([][]int, n)
+	memo := make([][]int, n+1)
 	for i := range memo {
 		memo[i] = make([]int, capacity+1)
 	}
+	memo[0][0] = 1
 
-	for i := 1; i < n; i++ {
-		for j := capacity; j >= 0; j-- {
+	for i := 0; i < n; i++ {
+		for j := 0; j < capacity+1; j++ {
 			if j < nums[i] {
-				memo[i][j] = memo[i-1][j]
+				memo[i+1][j] = memo[i][j]
 			} else {
-				memo[i][j] = memo[i-1][j] + memo[i-1][j-nums[i]]
+				memo[i+1][j] = memo[i][j] + memo[i][j-nums[i]]
 			}
 		}
 	}
 
-	return memo[n-1][capacity]
+	return memo[n][capacity]
+}
+
+// 空间优化：两个数组（滚动数组）
+func findTargetSumWays5(nums []int, target int) int {
+	sum := 0
+	for _, num := range nums {
+		sum += num
+	}
+
+	abs := func(x int) int {
+		if x < 0 {
+			return -x
+		}
+		return x
+	}
+
+	capacity := sum - abs(target)
+	if capacity < 0 || capacity%2 == 1 {
+		return 0
+	}
+	capacity /= 2
+
+	n := len(nums)
+
+	memo := make([][]int, 2)
+	for i := range memo {
+		memo[i] = make([]int, capacity+1)
+	}
+	memo[0][0] = 1
+
+	for i := 0; i < n; i++ {
+		for j := 0; j < capacity+1; j++ {
+			if j < nums[i] {
+				memo[(i+1)%2][j] = memo[i%2][j]
+			} else {
+				memo[(i+1)%2][j] = memo[i%2][j] + memo[i%2][j-nums[i]]
+			}
+		}
+	}
+
+	return memo[n%2][capacity]
+}
+
+// 空间优化：一个数组
+func findTargetSumWays6(nums []int, target int) int {
+	sum := 0
+	for _, num := range nums {
+		sum += num
+	}
+
+	abs := func(x int) int {
+		if x < 0 {
+			return -x
+		}
+		return x
+	}
+
+	capacity := sum - abs(target)
+	if capacity < 0 || capacity%2 == 1 {
+		return 0
+	}
+	capacity /= 2
+
+	n := len(nums)
+
+	memo := make([]int, capacity+1)
+	memo[0] = 1
+
+	for _, num := range nums {
+		for j := capacity; j >= num; j-- {
+			if j >= num {
+				memo[j] = memo[j] + memo[j-num]
+			}
+		}
+	}
+
+	return memo[capacity]
 }
