@@ -222,8 +222,6 @@ func findTargetSumWays6(nums []int, target int) int {
 	}
 	capacity /= 2
 
-	n := len(nums)
-
 	memo := make([]int, capacity+1)
 	memo[0] = 1
 
