@@ -4,7 +4,7 @@ import "math"
 
 // https://leetcode.cn/problems/length-of-the-longest-subsequence-that-sums-to-target/description/
 
-func lengthOfLongestSubsequence(nums []int, target int) int {
+func lengthOfLongestSubsequence1(nums []int, target int) int {
 	n := len(nums)
 
 	dp := make([][]int, n+1)
@@ -33,4 +33,24 @@ func lengthOfLongestSubsequence(nums []int, target int) int {
 	}
 
 	return dp[n][target]
+}
+
+func lengthOfLongestSubsequence2(nums []int, target int) int {
+	dp := make([]int, target+1)
+	for i := range dp {
+		dp[i] = math.MinInt
+	}
+	dp[0] = 0
+
+	for _, num := range nums {
+		for j := target; j >= num; j-- {
+			dp[j] = max(dp[j], dp[j-num]+1)
+		}
+	}
+
+	if dp[target] < 0 {
+		return -1
+	}
+
+	return dp[target]
 }
