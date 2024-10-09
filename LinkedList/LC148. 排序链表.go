@@ -1,7 +1,5 @@
 package LinkedList
 
-import "github.com/nxadm/tail"
-
 // https://leetcode.cn/problems/sort-list/description
 
 func sortList(head *ListNode) *ListNode {

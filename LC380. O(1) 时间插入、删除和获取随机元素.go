@@ -1,4 +1,4 @@
-package main
+package algogo
 
 import "math/rand"
 

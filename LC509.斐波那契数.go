@@ -1,4 +1,4 @@
-package main
+package algogo
 
 // https://leetcode.cn/problems/fibonacci-number/description
 
