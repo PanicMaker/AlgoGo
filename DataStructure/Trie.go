@@ -9,9 +9,9 @@ type Trie struct {
 	isEnd    bool
 }
 
-func Constructor() Trie {
-	return Trie{}
-}
+// func Constructor() Trie {
+// 	return Trie{}
+// }
 
 func (t *Trie) Insert(word string) {
 	node := t
