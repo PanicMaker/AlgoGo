@@ -9,7 +9,7 @@ func maxSubarraySumCircular(nums []int) int {
 	dp2 := make([]int, n)
 	dp2[0] = nums[0]
 
-	maxVal, minVal, sum := nums[0]
+	maxVal, minVal, sum := nums[0], nums[0], nums[0]
 
 	for i := 1; i < len(nums); i++ {
 		sum += nums[i]
