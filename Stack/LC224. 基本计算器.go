@@ -7,7 +7,43 @@ import (
 
 // https://leetcode.cn/problems/basic-calculator/description/
 
-func calculate(s string) int {
+func calculate(s string) (ans int) {
+
+	ops := make([]int, 0)
+	// 最开始栈内存储一个1，表示最外层的运算符号
+	ops = append(ops, 1)
+	sign := 1
+
+	for i := 0; i < len(s); {
+		ch := s[i]
+		switch ch {
+		case ' ':
+			i++
+		case '(':
+			ops = append(ops, sign)
+			i++
+		case ')':
+			ops = ops[:len(ops)-1]
+			i++
+		case '+':
+			sign = ops[len(ops)-1]
+			i++
+		case '-':
+			sign = -ops[len(ops)-1]
+			i++
+		default:
+			num := 0
+			for ; i < len(s) && s[i] >= '0' && s[i] <= '9'; i++ {
+				num = num*10 + int(s[i]-'0')
+			}
+			ans += sign * num
+		}
+	}
+
+	return ans
+}
+
+func calculate1(s string) int {
 	// 由于第一个数可能是负数，为了减少边界判断。一个小技巧是先往 nums 添加一个 0
 	nums := make([]int, 1)
 	ops := make([]byte, 0)
@@ -26,6 +62,7 @@ func calculate(s string) int {
 		}
 	}
 
+	// 去除所有空格
 	s = strings.ReplaceAll(s, " ", "")
 
 	for i := 0; i < len(s); {
@@ -70,7 +107,7 @@ func calculate(s string) int {
 }
 
 // 转换为逆波兰表达式求值
-func calculate1(s string) int {
+func calculate2(s string) int {
 	strToArr := func(s string) (res []string) {
 
 		for i := 0; i < len(s); {
