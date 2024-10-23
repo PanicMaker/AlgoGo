@@ -29,8 +29,11 @@ func addBinary(a string, b string) string {
 		} else if num == 1 {
 			res = "1" + res
 			flag = 0
-		} else {
+		} else if num == 2 {
 			res = "0" + res
+			flag = 1
+		} else {
+			res = "1" + res
 			flag = 1
 		}
 
