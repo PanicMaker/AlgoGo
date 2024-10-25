@@ -1,7 +1,8 @@
 package DP
 
-// 120. 三角形最小路径和
+// https://leetcode.cn/problems/triangle/description
 
+// 自底向上
 func minimumTotal(triangle [][]int) int {
 	m := len(triangle)
 
