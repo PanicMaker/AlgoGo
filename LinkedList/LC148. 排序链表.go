@@ -2,7 +2,8 @@ package LinkedList
 
 // https://leetcode.cn/problems/sort-list/description
 
-func sortList(head *ListNode) *ListNode {
+// 使用归并排序
+func sortListI(head *ListNode) *ListNode {
 	merge := func(l1, l2 *ListNode) *ListNode {
 		tmp := &ListNode{-1, nil}
 		p := tmp
@@ -59,4 +60,81 @@ func sortList(head *ListNode) *ListNode {
 	}
 
 	return sort(head, nil)
+}
+
+// 冒泡排序
+func sortListII(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+
+	p := head
+	for p.Next != nil {
+		tmp := p.Next
+		for tmp != nil {
+			if tmp.Val < p.Val {
+				tmp.Val, p.Val = p.Val, tmp.Val
+			}
+			tmp = tmp.Next
+		}
+		p = p.Next
+	}
+
+	return head
+}
+
+// 选择排序，重排节点
+func sortListIII(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+
+	dummy := &ListNode{}
+	dummy.Next = head
+	p := dummy
+
+	for p.Next != nil {
+		// 找到最小值节点及其前驱节点
+		pre, preMin := p, p
+		min := p.Next
+		for cur := p.Next; cur != nil; cur = cur.Next {
+			if cur.Val < min.Val {
+				preMin = pre
+				min = cur
+			}
+			pre = cur // pre移动到当前节点，作为下一个节点的前驱
+		}
+
+		// 将最小值节点移动到当前节点之后
+		preMin.Next = min.Next
+		min.Next = p.Next
+		p.Next = min
+		p = min
+	}
+
+	return dummy.Next
+}
+
+// 选择排序，交换值
+func sortListIIII(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+
+	p := head
+	for p != nil {
+		minNode := p
+		tmp := p.Next
+		for tmp != nil {
+			if tmp.Val < minNode.Val {
+				minNode = tmp
+			}
+			tmp = tmp.Next
+		}
+		// 交换 p 和 minNode 的值
+		p.Val, minNode.Val = minNode.Val, p.Val
+		p = p.Next
+	}
+
+	return head
 }
