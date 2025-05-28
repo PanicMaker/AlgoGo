@@ -13,7 +13,7 @@ func Test_nthUglyNumber(t *testing.T) {
 		{100, 1536},
 	}
 	for _, tt := range tests {
-		got := nthUglyNumber(tt.n)
+		got := nthUglyNumberII(tt.n)
 		if got != tt.want {
 			t.Errorf("nthUglyNumber(%d) = %d, want %d", tt.n, got, tt.want)
 		}
