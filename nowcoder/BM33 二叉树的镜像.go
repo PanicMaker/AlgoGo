@@ -1,4 +1,4 @@
-package Tree
+package nowcoder
 
 // https://www.nowcoder.com/practice/a9d0ecbacef9410ca97463e4a5c83be7
 
