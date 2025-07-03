@@ -1,4 +1,4 @@
-package String
+package nowcoder
 
 // https://www.nowcoder.com/practice/2b317e02f14247a49ffdbdba315459e7
 
