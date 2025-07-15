@@ -1,4 +1,4 @@
-package String
+package slidingwindow
 
 func lengthOfLongestSubstring(s string) int {
 	window := make(map[byte]int)
