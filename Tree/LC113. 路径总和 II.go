@@ -16,7 +16,7 @@ func pathSum(root *TreeNode, targetSum int) [][]int {
 		if node.Left == nil && node.Right == nil && newTarget == 0 {
 			tmp := make([]int, len(path))
 			copy(tmp, path)
-			ans = append(ans)
+			ans = append(ans, tmp)
 		}
 
 		path = append(path, node.Val)
