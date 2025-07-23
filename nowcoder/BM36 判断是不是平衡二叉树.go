@@ -34,9 +34,6 @@ func IsBalanced_Solution(pRoot *TreeNode) bool {
 		}
 		return x
 	}
-	if abs(left-right) > 1 {
-		return false
-	}
 
-	return true
+	return abs(left-right) <= 1
 }
