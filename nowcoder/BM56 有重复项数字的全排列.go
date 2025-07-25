@@ -1,5 +1,7 @@
 package nowcoder
 
+import "sort"
+
 // https://www.nowcoder.com/practice/a43a2b986ef34843ac4fdd9159b69863
 
 func permuteUnique(num []int) [][]int {
@@ -7,6 +9,8 @@ func permuteUnique(num []int) [][]int {
 	if n == 0 {
 		return nil
 	}
+
+	sort.Ints(num) // 先排序，保证字典序
 
 	ans := make([][]int, 0)
 	path := make([]int, 0)
@@ -26,7 +30,7 @@ func permuteUnique(num []int) [][]int {
 				continue
 			}
 
-			if j > 0 && num[j] == num[j-1] && used[j-1] {
+			if j > 0 && num[j] == num[j-1] && !used[j-1] {
 				continue
 			}
 
