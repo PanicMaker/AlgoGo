@@ -2,6 +2,8 @@ package nowcoder
 
 import "sort"
 
+// https://www.nowcoder.com/practice/fe6b651b66ae47d7acce78ffdd9a96c7
+
 func Permutation(str string) []string {
 	n := len(str)
 	if n == 0 {
