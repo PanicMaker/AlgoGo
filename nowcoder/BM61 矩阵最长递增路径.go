@@ -2,7 +2,7 @@ package nowcoder
 
 // https://www.nowcoder.com/practice/7a71a88cdf294ce6bdf54c899be967a2
 
-func solveBM61(matrix [][]int) int {
+func solveBM61I(matrix [][]int) int {
 	m, n := len(matrix), len(matrix[0])
 
 	ans := 0
@@ -44,6 +44,54 @@ func solveBM61(matrix [][]int) int {
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {
 			dfs(i, j)
+		}
+	}
+
+	return ans
+}
+
+func solveBM61II(matrix [][]int) int {
+	m, n := len(matrix), len(matrix[0])
+
+	// dp[i][j] 表示从 (i,j) 出发的最长递增路径长度
+	dp := make([][]int, m)
+	for i := range dp {
+		dp[i] = make([]int, n)
+	}
+
+	var dfs func(i, j int) int
+	dfs = func(i, j int) int {
+		// 如果已经计算过，直接返回
+		if dp[i][j] > 0 {
+			return dp[i][j]
+		}
+
+		// 初始默认为1（自己本身）
+		maxLen := 1
+
+		// 向四个方向探索
+		dirs := [4][2]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
+		for _, dir := range dirs {
+			x, y := i+dir[0], j+dir[1]
+			if x >= 0 && y >= 0 && x < m && y < n && matrix[x][y] < matrix[i][j] {
+				// 如果相邻点的值更小，则可以构成递增路径
+				currLen := 1 + dfs(x, y)
+				if currLen > maxLen {
+					maxLen = currLen
+				}
+			}
+		}
+
+		// 将结果存入 dp 数组
+		dp[i][j] = maxLen
+		return maxLen
+	}
+
+	// 遍历所有起点
+	ans := 0
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			ans = max(ans, dfs(i, j))
 		}
 	}
 
