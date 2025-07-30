@@ -97,10 +97,3 @@ func solveBM61II(matrix [][]int) int {
 
 	return ans
 }
-
-func max(a, b int) int {
-	if a < b {
-		return b
-	}
-	return b
-}
