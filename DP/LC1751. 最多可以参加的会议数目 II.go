@@ -1,4 +1,4 @@
-package algogo
+package DP
 
 import "slices"
 
