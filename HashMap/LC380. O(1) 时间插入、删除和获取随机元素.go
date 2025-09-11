@@ -1,4 +1,4 @@
-package algogo
+package HashMap
 
 import "math/rand"
 
