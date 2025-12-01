@@ -1,4 +1,4 @@
-package algogo
+package Array
 
 import (
 	"strconv"
