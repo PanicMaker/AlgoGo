@@ -15,7 +15,7 @@ type Solution struct {
 	list     *list.List
 }
 
-func Constructor(capacity int) Solution {
+func NewLRU(capacity int) Solution {
 	return Solution{
 		capacity: capacity,
 		cache:    make(map[int]*list.Element),
