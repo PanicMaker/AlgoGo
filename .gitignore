@@ -27,5 +27,11 @@ gen
 # Go workspace file
 go.work
 
+### macOS template
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
 .vscode
 .roo
